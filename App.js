@@ -1,51 +1,57 @@
 import { StatusBar } from 'expo-status-bar';
 import { Component } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default class App extends Component {
 
   // Criação do construtor para criar o State nas Props
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       numero: 0
     };
     // Criação do bind da Function
-    this.numberAlterMais = this.numberAlterMais.bind(this);
-    this.numberAlterMenos = this.numberAlterMenos.bind(this);
+    this.Increment = this.Increment.bind(this);
+    this.btnDecrement = this.btnDecrement.bind(this);
   };
 
   // Function do Button
-  numberAlterMais(){
+  Increment() {
     this.setState({
       numero: this.state.numero + 1
     })
   }
-  numberAlterMenos(){
+  btnDecrement() {
     if (this.state.numero == - 0) {
       alert('Number menor que ZERO (0)')
       this.setState({
         numero: 0,
       })
     }
-    else{
+    else {
       this.setState({
         numero: this.state.numero - 1,
       })
     }
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <View style={styles.container}>
         <Text style={styles.text}> {this.state.numero} </Text>
-        <Button 
-        title='Count+'
-        onPress={this.numberAlterMais} />
-        <Button
-        title='Count-' 
-        onPress={this.numberAlterMenos} />
-        <StatusBar style="auto" />
+
+        <TouchableOpacity style={styles.btnIncrement}
+          onPress={this.Increment}>
+          <View>
+            <Text style={{color: '#fff'}}>Increment</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btnDecrement}
+          onPress={this.btnDecrement}>
+          <View>
+            <Text>Decrement</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -61,5 +67,30 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: '500'
+  },
+  btnIncrement: {
+    width: 230,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#000',
+    color: '#fff',
+    fontSize: 16,
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 5,
+  },
+  btnDecrement: {
+    width: 230,
+    height: 50,
+    color: '#000',
+    fontSize: 16,
+    borderWidth: 2,
+    borderRadius: 25,
+    borderColor: '#000',
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 2,
   },
 });
